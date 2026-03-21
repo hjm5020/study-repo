@@ -7,10 +7,10 @@
 ### CS 기초
 | 주제 | 진행 |
 |------|------|
-| [자료구조](cs-fundamentals/data-structures/) | ⬜ |
-| [알고리즘](cs-fundamentals/algorithms/) | ⬜ |
-| [운영체제](cs-fundamentals/os/) | ⬜ |
-| [네트워크](cs-fundamentals/network/) | ⬜ |
+| [자료구조](cs-fundamentals/data-structures/) | ✅ |
+| [알고리즘](cs-fundamentals/algorithms/) | ✅ |
+| [운영체제](cs-fundamentals/os/) | ✅ |
+| [네트워크](cs-fundamentals/network/) | ✅ |
 
 ### Java
 | 주제 | 진행 |
