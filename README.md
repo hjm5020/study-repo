@@ -15,11 +15,11 @@
 ### Java
 | 주제 | 진행 |
 |------|------|
-| [Java 기초](java/basics/) | ⬜ |
-| [OOP](java/oop/) | ⬜ |
-| [JVM](java/jvm/) | ⬜ |
-| [Concurrency](java/concurrency/) | ⬜ |
-| [Java 최신 기능](java/modern-java/) | ⬜ |
+| [Java 기초](java/basics/) | ✅ |
+| [OOP](java/oop/) | ✅ |
+| [JVM](java/jvm/) | ✅ |
+| [Concurrency](java/concurrency/) | ✅ |
+| [Java 최신 기능](java/modern-java/) | ✅ |
 
 ### Spring
 | 주제 | 진행 |
