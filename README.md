@@ -35,10 +35,10 @@
 ### 데이터베이스
 | 주제 | 진행 |
 |------|------|
-| [RDBMS 기초](database/rdbms/) | ⬜ |
-| [MySQL](database/mysql/) | ⬜ |
+| [RDBMS 기초](database/rdbms/) | ✅ |
+| [MySQL](database/mysql/) | ✅ |
 | [JPA & Hibernate](database/jpa/) | ⬜ |
-| [Redis](database/redis/) | ⬜ |
+| [Redis](database/redis/) | ✅ |
 
 ### 인프라 & DevOps
 | 주제 | 진행 |
