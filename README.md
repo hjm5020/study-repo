@@ -51,8 +51,8 @@
 ### 기타
 | 주제 | 진행 |
 |------|------|
-| [디자인 패턴](etc/design-patterns/) | ⬜ |
-| [시스템 설계](etc/system-design/) | ⬜ |
+| [디자인 패턴](etc/design-patterns/) | ✅ |
+| [시스템 설계](etc/system-design/) | ✅ |
 | [책 정리](books/) | ⬜ |
 
 ### TIL (Today I Learned)
