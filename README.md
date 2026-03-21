@@ -24,13 +24,13 @@
 ### Spring
 | 주제 | 진행 |
 |------|------|
-| [Spring Core](spring/core/) | ⬜ |
-| [Spring Boot](spring/spring-boot/) | ⬜ |
-| [Spring MVC](spring/mvc/) | ⬜ |
-| [Spring Data JPA](spring/data-jpa/) | ⬜ |
-| [Spring Security](spring/security/) | ⬜ |
+| [Spring Core](spring/core/) | ✅ |
+| [Spring Boot](spring/spring-boot/) | ✅ |
+| [Spring MVC](spring/mvc/) | ✅ |
+| [Spring Data JPA](spring/data-jpa/) | ✅ |
+| [Spring Security](spring/security/) | ✅ |
 | [Spring Batch](spring/batch/) | ⬜ |
-| [테스트](spring/testing/) | ⬜ |
+| [테스트](spring/testing/) | ✅ |
 
 ### 데이터베이스
 | 주제 | 진행 |
