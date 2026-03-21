@@ -43,8 +43,8 @@
 ### 인프라 & DevOps
 | 주제 | 진행 |
 |------|------|
-| [Docker](infra/docker/) | ⬜ |
-| [Kubernetes](infra/kubernetes/) | ⬜ |
+| [Docker](infra/docker/) | ✅ |
+| [Kubernetes](infra/kubernetes/) | ✅ |
 | [CI/CD](infra/ci-cd/) | ⬜ |
 | [Linux](infra/linux/) | ⬜ |
 
