@@ -45,7 +45,7 @@
 |------|------|
 | [Docker](infra/docker/) | ✅ |
 | [Kubernetes](infra/kubernetes/) | ✅ |
-| [CI/CD](infra/ci-cd/) | ⬜ |
+| [CI/CD](infra/ci-cd/) | ✅ |
 | [Linux](infra/linux/) | ⬜ |
 
 ### 기타
