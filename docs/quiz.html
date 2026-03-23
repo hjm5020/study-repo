@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>퀴즈 진행 중 - Study Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="back-link">← 홈</a>
+      <h1>Study Quiz</h1>
+    </div>
+
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="progressText">1 / 10</div>
+
+    <div class="question-card">
+      <div class="question-meta">
+        <span class="badge badge-type" id="questionType"></span>
+        <span class="badge badge-cat" id="questionCategory"></span>
+      </div>
+      <div class="question-text" id="questionText"></div>
+      <div id="choices" class="choices"></div>
+      <div class="explanation" id="explanation" style="display:none"></div>
+      <button class="btn btn-primary btn-next" id="nextBtn" style="display:none">다음 문제 →</button>
+    </div>
+  </div>
+
+  <script src="js/quizData.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

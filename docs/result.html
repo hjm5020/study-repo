@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결과 - Study Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Study Quiz — 결과</h1>
+    </div>
+
+    <div id="resultSummary" class="result-summary"></div>
+
+    <div class="section">
+      <h2>오답 노트</h2>
+      <div id="wrongList"></div>
+    </div>
+
+    <div class="section til-section">
+      <h2>TIL 마크다운</h2>
+      <pre id="tilContent" class="til-content"></pre>
+      <button class="btn btn-secondary" id="copyTilBtn">📋 TIL 복사</button>
+    </div>
+
+    <div class="btn-group result-actions">
+      <button class="btn btn-primary" id="retryWrongsBtn">오답만 다시 풀기</button>
+      <button class="btn btn-secondary" id="homeBtn">홈으로</button>
+    </div>
+  </div>
+
+  <script src="js/quizData.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/result.js"></script>
+</body>
+</html>
