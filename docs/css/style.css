@@ -524,6 +524,108 @@ body {
 }
 .ct-empty { font-size: 0.85rem; color: var(--gray-500); padding: 8px 0; }
 
+/* ---- Interview ---- */
+.iv-setup { display: flex; flex-direction: column; gap: 16px; }
+.iv-setup-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.iv-progress-container {
+  background: var(--gray-200);
+  border-radius: 99px;
+  height: 8px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+.iv-progress-bar {
+  background: var(--primary);
+  height: 100%;
+  border-radius: 99px;
+  transition: width .3s ease;
+}
+.iv-progress-text {
+  text-align: right;
+  font-size: 0.82rem;
+  color: var(--gray-500);
+  margin-bottom: 20px;
+}
+
+.iv-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.iv-card-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.iv-question {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--gray-900);
+}
+
+.iv-memo {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  line-height: 1.6;
+  color: var(--gray-900);
+  background: var(--gray-50);
+  resize: none;
+  transition: border-color .15s;
+  box-sizing: border-box;
+}
+.iv-memo:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+}
+.iv-memo::placeholder { color: var(--gray-300); }
+
+.iv-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.iv-hint {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+.iv-answer {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+}
+
+.iv-next-btn { width: 100%; padding: 13px; font-size: 1rem; }
+
+.iv-done {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.iv-done-icon { font-size: 3rem; margin-bottom: 12px; }
+.iv-done-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+.iv-done-sub { font-size: 0.95rem; color: var(--gray-500); }
+
 /* Responsive */
 @media (max-width: 600px) {
   .container { padding: 12px; }

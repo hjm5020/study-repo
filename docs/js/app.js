@@ -15,6 +15,8 @@
   }
 
   // ── 탭 ──────────────────────────────────────────
+  let interviewInited = false;
+
   function initTabs() {
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -23,6 +25,11 @@
         document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
         btn.classList.add('active');
         document.getElementById('tab-' + target).style.display = 'block';
+
+        // 모의면접 탭 첫 진입 또는 재진입 시 초기화
+        if (target === 'interview') {
+          window.initInterview();
+        }
       });
     });
   }

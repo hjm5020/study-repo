@@ -17,12 +17,16 @@
     <div class="tab-bar">
       <button class="tab-btn active" data-tab="concepts">📚 개념 정리</button>
       <button class="tab-btn" data-tab="quiz">🧠 퀴즈</button>
+      <button class="tab-btn" data-tab="interview">🎤 모의면접</button>
     </div>
 
     <!-- 개념 정리 탭 -->
     <div id="tab-concepts" class="tab-panel">
       <div id="conceptTree" class="concept-tree"></div>
     </div>
+
+    <!-- 모의면접 탭 -->
+    <div id="tab-interview" class="tab-panel" style="display:none"></div>
 
     <!-- 퀴즈 탭 -->
     <div id="tab-quiz" class="tab-panel" style="display:none">
@@ -56,5 +60,6 @@
   <script src="js/conceptData.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/interview.js"></script>
 </body>
 </html>
