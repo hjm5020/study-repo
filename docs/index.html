@@ -13,32 +13,47 @@
       <p>면접 대비 학습 퀴즈</p>
     </div>
 
-    <div id="categories" class="categories"></div>
-
-    <div class="controls">
-      <label for="countSelect">문제 수</label>
-      <select id="countSelect">
-        <option value="5">5문제</option>
-        <option value="10" selected>10문제</option>
-        <option value="15">15문제</option>
-        <option value="20">20문제</option>
-        <option value="0">전체</option>
-      </select>
-      <div class="btn-group" style="margin-left:auto">
-        <button class="btn btn-secondary" id="randomBtn">전체 랜덤</button>
-        <button class="btn btn-primary" id="startBtn" disabled>퀴즈 시작</button>
-      </div>
+    <!-- 탭 -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="concepts">📚 개념 정리</button>
+      <button class="tab-btn" data-tab="quiz">🧠 퀴즈</button>
     </div>
 
-    <div class="dashboard" id="dashboard">
-      <h2>학습 기록</h2>
-      <div class="stats-grid" id="statsGrid"></div>
-      <div class="weak-areas" id="weakAreas"></div>
-      <div class="history-list" id="historyList"></div>
+    <!-- 개념 정리 탭 -->
+    <div id="tab-concepts" class="tab-panel">
+      <div id="conceptTree" class="concept-tree"></div>
+    </div>
+
+    <!-- 퀴즈 탭 -->
+    <div id="tab-quiz" class="tab-panel" style="display:none">
+      <div id="categories" class="categories"></div>
+
+      <div class="controls">
+        <label for="countSelect">문제 수</label>
+        <select id="countSelect">
+          <option value="5">5문제</option>
+          <option value="10" selected>10문제</option>
+          <option value="15">15문제</option>
+          <option value="20">20문제</option>
+          <option value="0">전체</option>
+        </select>
+        <div class="btn-group" style="margin-left:auto">
+          <button class="btn btn-secondary" id="randomBtn">전체 랜덤</button>
+          <button class="btn btn-primary" id="startBtn" disabled>퀴즈 시작</button>
+        </div>
+      </div>
+
+      <div class="dashboard" id="dashboard">
+        <h2>학습 기록</h2>
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="weak-areas" id="weakAreas"></div>
+        <div class="history-list" id="historyList"></div>
+      </div>
     </div>
   </div>
 
   <script src="js/quizData.js"></script>
+  <script src="js/conceptData.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/app.js"></script>
 </body>

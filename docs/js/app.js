@@ -1,10 +1,10 @@
 (() => {
-  // 선택 상태
-  let selectedCategory = null;
   let selectedSubtopics = new Set();
   let questionCount = 10;
 
   function init() {
+    initTabs();
+    renderConceptTree();
     renderCategories();
     renderDashboard();
     document.getElementById('countSelect').addEventListener('change', e => {
@@ -14,6 +14,87 @@
     document.getElementById('randomBtn').addEventListener('click', startRandom);
   }
 
+  // ── 탭 ──────────────────────────────────────────
+  function initTabs() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+        btn.classList.add('active');
+        document.getElementById('tab-' + target).style.display = 'block';
+      });
+    });
+  }
+
+  // ── 개념 트리 ────────────────────────────────────
+  function renderConceptTree() {
+    const container = document.getElementById('conceptTree');
+    container.innerHTML = CATEGORIES.map(cat => `
+      <div class="ct-category">
+        <div class="ct-cat-header" onclick="toggleCtCategory('${cat.id}')">
+          <span class="ct-cat-icon">${cat.icon}</span>
+          <span class="ct-cat-name">${cat.name}</span>
+          <span class="ct-toggle-icon" id="ct-icon-${cat.id}">▶</span>
+        </div>
+        <div class="ct-subtopics" id="ct-sub-${cat.id}">
+          ${cat.subtopics.map(sub => `
+            <div class="ct-subtopic">
+              <div class="ct-sub-header" onclick="toggleCtSubtopic('${cat.id}', '${encodeURIComponent(sub)}')">
+                <span class="ct-sub-name">${sub}</span>
+                <span class="ct-sub-toggle" id="ct-sub-icon-${cat.id}-${encodeURIComponent(sub)}">▶</span>
+              </div>
+              <div class="ct-concepts" id="ct-concepts-${cat.id}-${encodeURIComponent(sub)}">
+                ${renderConcepts(sub)}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderConcepts(subtopic) {
+    const concepts = CONCEPT_DATA[subtopic];
+    if (!concepts || concepts.length === 0) return '<p class="ct-empty">개념 데이터가 없습니다.</p>';
+    return concepts.map((c, i) => `
+      <div class="ct-concept">
+        <div class="ct-concept-header" onclick="toggleCtConcept(this)">
+          <span class="ct-concept-title">${c.title}</span>
+          <span class="ct-concept-arrow">▼</span>
+        </div>
+        <div class="ct-concept-body">
+          <p>${c.desc}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  window.toggleCtCategory = function(catId) {
+    const sub = document.getElementById('ct-sub-' + catId);
+    const icon = document.getElementById('ct-icon-' + catId);
+    const isOpen = sub.style.display === 'block';
+    sub.style.display = isOpen ? 'none' : 'block';
+    icon.textContent = isOpen ? '▶' : '▼';
+  };
+
+  window.toggleCtSubtopic = function(catId, encodedSub) {
+    const concepts = document.getElementById('ct-concepts-' + catId + '-' + encodedSub);
+    const icon = document.getElementById('ct-sub-icon-' + catId + '-' + encodedSub);
+    const isOpen = concepts.style.display === 'block';
+    concepts.style.display = isOpen ? 'none' : 'block';
+    icon.textContent = isOpen ? '▶' : '▼';
+  };
+
+  window.toggleCtConcept = function(headerEl) {
+    const body = headerEl.nextElementSibling;
+    const arrow = headerEl.querySelector('.ct-concept-arrow');
+    const isOpen = body.style.display === 'block';
+    body.style.display = isOpen ? 'none' : 'block';
+    arrow.textContent = isOpen ? '▼' : '▲';
+  };
+
+  // ── 퀴즈 카테고리 ──────────────────────────────────
   function renderCategories() {
     const container = document.getElementById('categories');
     container.innerHTML = CATEGORIES.map(cat => `
@@ -41,9 +122,7 @@
     const subtopics = document.getElementById(`sub-${catId}`);
     const isOpen = card.classList.toggle('open');
     subtopics.style.display = isOpen ? 'flex' : 'none';
-
     if (!isOpen) {
-      // 닫을 때 해당 카테고리 체크박스 모두 해제
       card.querySelectorAll('.subtopic-cb').forEach(cb => {
         cb.checked = false;
         selectedSubtopics.delete(cb.dataset.cat + '::' + cb.dataset.sub);
@@ -57,22 +136,13 @@
     document.querySelectorAll('.subtopic-cb:checked').forEach(cb => {
       selectedSubtopics.add(cb.dataset.cat + '::' + cb.dataset.sub);
     });
-    updateStartBtn();
+    document.getElementById('startBtn').disabled = selectedSubtopics.size === 0;
   };
 
-  function updateStartBtn() {
-    const btn = document.getElementById('startBtn');
-    btn.disabled = selectedSubtopics.size === 0;
-  }
-
   function getSelectedQuestions() {
-    let pool = QUIZ_DATA.filter(q => {
-      return selectedSubtopics.has(q.category + '::' + q.subtopic);
-    });
+    let pool = QUIZ_DATA.filter(q => selectedSubtopics.has(q.category + '::' + q.subtopic));
     pool = shuffle(pool);
-    if (questionCount > 0 && pool.length > questionCount) {
-      pool = pool.slice(0, questionCount);
-    }
+    if (questionCount > 0 && pool.length > questionCount) pool = pool.slice(0, questionCount);
     return pool;
   }
 
@@ -87,20 +157,19 @@
   function startRandom() {
     let pool = shuffle([...QUIZ_DATA]);
     const count = questionCount > 0 ? Math.min(questionCount, pool.length) : pool.length;
-    const questions = pool.slice(0, count);
-    sessionStorage.setItem('quizQuestions', JSON.stringify(questions));
+    sessionStorage.setItem('quizQuestions', JSON.stringify(pool.slice(0, count)));
     sessionStorage.setItem('quizTopics', JSON.stringify(['전체 랜덤']));
     window.location.href = 'quiz.html';
   }
 
+  // ── 대시보드 ──────────────────────────────────────
   function renderDashboard() {
     const todayStats = Storage.getTodayStats();
     const weekStats = Storage.getWeekStats();
     const catStats = Storage.getCategoryStats();
     const recent = Storage.getRecentSessions(5);
 
-    const statsGrid = document.getElementById('statsGrid');
-    statsGrid.innerHTML = `
+    document.getElementById('statsGrid').innerHTML = `
       <div class="stat-card">
         <div class="stat-value">${todayStats.sessions}</div>
         <div class="stat-label">오늘 세션</div>
@@ -119,14 +188,13 @@
       </div>
     `;
 
-    // 취약 분야
-    const weakAreas = document.getElementById('weakAreas');
     const catEntries = Object.entries(catStats)
       .filter(([, v]) => v.total >= 3)
       .map(([cat, v]) => ({ cat, rate: Math.round(v.correct / v.total * 100) }))
       .sort((a, b) => a.rate - b.rate)
       .slice(0, 3);
 
+    const weakAreas = document.getElementById('weakAreas');
     if (catEntries.length > 0) {
       weakAreas.innerHTML = `
         <h3>취약 분야</h3>
@@ -144,7 +212,6 @@
       weakAreas.innerHTML = '';
     }
 
-    // 최근 기록
     const historyList = document.getElementById('historyList');
     if (recent.length > 0) {
       historyList.innerHTML = `
@@ -153,7 +220,7 @@
           ${recent.map(s => `
             <li class="history-item">
               <span class="history-date">${formatDate(s.date)}</span>
-              <span class="history-topics">${Array.isArray(s.topics) ? s.topics.join(', ') : s.topics}</span>
+              <span class="history-topics">${Array.isArray(s.topics) ? s.topics.map(t => t.replace('::', ' > ')).join(', ') : s.topics}</span>
               <span class="history-score">${s.score}/${s.total} (${Math.round(s.score/s.total*100)}%)</span>
             </li>
           `).join('')}
