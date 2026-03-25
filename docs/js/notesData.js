@@ -6,6 +6,14 @@ const NOTES_DATA = [
     notes: [
       { title: '쿠버네티스 vs VM', file: 'notes/infra/kubernetes-vs-vm.html' }
     ]
+  },
+  {
+    category: 'database',
+    icon: '🗄️',
+    name: 'Database',
+    notes: [
+      { title: 'DB 인덱스 완전 정복', file: 'notes/database/db-index-study.html' }
+    ]
   }
   // 카테고리/노트 추가 시 여기에 추가
   // {
