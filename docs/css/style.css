@@ -717,8 +717,14 @@ body {
   display: block;
 }
 
-/* Notes tab: wider container */
-#tab-notes .notes-layout { margin: 0 -16px; border-radius: 0; border-left: none; border-right: none; }
+/* Notes tab: break out of container to full width */
+#tab-notes {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 24px;
+}
 
 /* Responsive */
 @media (max-width: 600px) {
@@ -735,5 +741,6 @@ body {
   .notes-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--gray-200); max-height: 200px; }
   .notes-content { min-height: 60vh; }
   .notes-iframe { min-height: 60vh; }
-  #tab-notes .notes-layout { margin: 0; border-radius: var(--radius); border: 1px solid var(--gray-200); }
+  #tab-notes { padding: 0 12px; }
+  #tab-notes .notes-layout { border-radius: var(--radius); }
 }
