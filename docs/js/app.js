@@ -30,6 +30,11 @@
         if (target === 'interview') {
           window.initInterview();
         }
+        // 공부자료 탭 첫 진입 시 초기화
+        if (target === 'notes' && !window._notesInited) {
+          window.initNotes();
+          window._notesInited = true;
+        }
       });
     });
   }
