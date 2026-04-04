@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java 코딩 테스트 기초 세팅 — 개인 학습 노트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --accent3: #f78166;
+    --accent4: #d2a8ff;
+    --accent5: #ffa657;
+    --tag-bg: #1f3a5f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0 36px;
+    text-align: center;
+    background: linear-gradient(180deg, #0d1f3c 0%, var(--bg) 100%);
+  }
+  .header-tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid #2d4a7a;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  header h1 span { color: var(--accent); }
+  header p {
+    color: var(--text2);
+    font-size: 14px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .header-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); display: inline-block; }
+
+  /* Layout */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* TOC */
+  .toc {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 40px 0;
+  }
+  .toc-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 14px;
+  }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin: 6px 0; }
+  .toc a { color: var(--accent); text-decoration: none; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* Section */
+  .section {
+    margin: 56px 0;
+    scroll-margin-top: 24px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    background: var(--accent);
+    color: #0d1117;
+    font-size: 11px;
+    font-weight: 700;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Content blocks */
+  .prose { color: var(--text2); line-height: 1.9; margin-bottom: 20px; }
+  .prose strong { color: var(--text); font-weight: 500; }
+
+  /* Callout */
+  .callout {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: var(--text2);
+  }
+  .callout strong { color: var(--text); }
+  .callout.green { border-left-color: var(--accent2); }
+  .callout.orange { border-left-color: var(--accent5); }
+  .callout.purple { border-left-color: var(--accent4); }
+  .callout.red { border-left-color: var(--accent3); }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    background: var(--bg3);
+    color: var(--text2);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+  }
+  td:first-child { color: var(--text); font-weight: 500; }
+  tr:hover td { background: var(--bg2); }
+
+  /* Diagram card */
+  .diagram-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 20px;
+    margin: 24px 0;
+  }
+  .diagram-card svg { width: 100%; height: auto; display: block; }
+  .diagram-label {
+    font-size: 11px;
+    color: var(--text2);
+    text-align: center;
+    margin-top: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  /* SVG text styles */
+  .t  { font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 400; fill: #e6edf3; }
+  .ts { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: 400; fill: #8b949e; }
+  .th { font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 500; fill: #e6edf3; }
+
+  /* Color node classes for SVG */
+  .c-blue rect { fill: #0c447c; stroke: #185fa5; }
+  .c-blue .t, .c-blue .th { fill: #b5d4f4; } .c-blue .ts { fill: #85b7eb; }
+  .c-purple rect { fill: #3c3489; stroke: #534ab7; }
+  .c-purple .t, .c-purple .th { fill: #cecbf6; } .c-purple .ts { fill: #afa9ec; }
+  .c-teal rect { fill: #085041; stroke: #0f6e56; }
+  .c-teal .t, .c-teal .th { fill: #9fe1cb; } .c-teal .ts { fill: #5dcaa5; }
+  .c-amber rect { fill: #633806; stroke: #854f0b; }
+  .c-amber .t, .c-amber .th { fill: #fac775; } .c-amber .ts { fill: #ef9f27; }
+  .c-gray rect { fill: #2c2c2a; stroke: #444441; }
+  .c-gray .t, .c-gray .th { fill: #d3d1c7; } .c-gray .ts { fill: #b4b2a9; }
+  .c-coral rect { fill: #4a1b0c; stroke: #712b13; }
+  .c-coral .t, .c-coral .th { fill: #f5c4b3; } .c-coral .ts { fill: #f0997b; }
+
+  /* Code block */
+  pre {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #79c0ff;
+  }
+  .code-label {
+    font-size: 11px;
+    color: var(--text2);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 4px;
+  }
+  .kw { color: #ff7b72; }
+  .fn { color: #d2a8ff; }
+  .str { color: #a5d6ff; }
+  .cm { color: #8b949e; }
+  .num { color: #79c0ff; }
+  .type { color: #ffa657; }
+
+  /* Key insight box */
+  .insight {
+    background: linear-gradient(135deg, #0d1f3c 0%, #1a1a2e 100%);
+    border: 1px solid #2d4a7a;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .insight-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .insight-text { font-size: 14px; color: var(--text2); line-height: 1.8; }
+  .insight-text strong { color: var(--accent); }
+
+  /* Sub-section */
+  .sub-section {
+    margin: 32px 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--border);
+  }
+  .sub-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--accent);
+  }
+
+  /* vs-box */
+  .vs-box {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .vs-box .side {
+    padding: 20px;
+    background: var(--bg2);
+  }
+  .vs-box .side h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .vs-box .side.bad h4 { color: var(--accent3); }
+  .vs-box .side.good h4 { color: var(--accent2); }
+  .vs-box .divider {
+    width: 1px;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .vs-box .divider span {
+    background: var(--bg3);
+    color: var(--text2);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    position: absolute;
+  }
+  .vs-box pre {
+    margin: 8px 0 0;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    color: var(--text2);
+    font-size: 13px;
+    margin-top: 80px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-tag">Personal Study Note</div>
+    <h1>Java 코딩 테스트 <span>기초 세팅</span></h1>
+    <p>BufferedReader, StringBuilder, 오버플로우 — 시작 전에 반드시 알아야 할 것들</p>
+    <div class="header-meta">
+      <span><span class="dot"></span> 2026년 학습 기록</span>
+      <span>Java · 입출력 · 코딩 테스트</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-title">목차</div>
+    <ol>
+      <li><a href="#s1">왜 Scanner가 아니라 BufferedReader인가</a></li>
+      <li><a href="#s2">BufferedReader + StringTokenizer 입력 패턴</a></li>
+      <li><a href="#s3">StringBuilder 출력 — System.out.println의 함정</a></li>
+      <li><a href="#s4">int → long 오버플로우 감각</a></li>
+      <li><a href="#s5">실전 풀 템플릿</a></li>
+    </ol>
+  </nav>
+
+  <!-- ===== Section 1 ===== -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>왜 Scanner가 아니라 BufferedReader인가</h2>
+    </div>
+
+    <p class="prose">
+      코딩 테스트에서 <strong>입력 데이터가 10만 줄 이상</strong>이면 Scanner로는 시간 초과가 납니다.
+      BufferedReader는 내부 버퍼(8KB)에 데이터를 모아서 한 번에 읽기 때문에 <strong>Scanner보다 5~10배 빠릅니다.</strong>
+    </p>
+
+    <div class="diagram-card">
+      <svg viewBox="0 0 680 180">
+        <!-- Scanner 경로 -->
+        <g class="c-coral">
+          <rect x="20" y="20" width="120" height="50" rx="8" stroke-width="1"/>
+          <text class="th" x="80" y="50" text-anchor="middle">입력 스트림</text>
+        </g>
+        <line x1="140" y1="45" x2="180" y2="45" stroke="#f78166" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <g class="c-coral">
+          <rect x="180" y="20" width="100" height="50" rx="8" stroke-width="1"/>
+          <text class="th" x="230" y="42" text-anchor="middle">Scanner</text>
+          <text class="ts" x="230" y="58" text-anchor="middle">정규식 파싱</text>
+        </g>
+        <line x1="280" y1="45" x2="320" y2="45" stroke="#f78166" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <g class="c-coral">
+          <rect x="320" y="20" width="80" height="50" rx="8" stroke-width="1"/>
+          <text class="th" x="360" y="42" text-anchor="middle">int</text>
+          <text class="ts" x="360" y="58" text-anchor="middle">한 글자씩</text>
+        </g>
+        <text class="ts" x="500" y="50" text-anchor="middle" fill="#f78166">느림 (정규식 오버헤드)</text>
+
+        <!-- BufferedReader 경로 -->
+        <g class="c-teal">
+          <rect x="20" y="110" width="120" height="50" rx="8" stroke-width="1"/>
+          <text class="th" x="80" y="140" text-anchor="middle">입력 스트림</text>
+        </g>
+        <line x1="140" y1="135" x2="180" y2="135" stroke="#3fb950" stroke-width="2"/>
+        <g class="c-teal">
+          <rect x="180" y="110" width="140" height="50" rx="8" stroke-width="1"/>
+          <text class="th" x="250" y="132" text-anchor="middle">BufferedReader</text>
+          <text class="ts" x="250" y="148" text-anchor="middle">8KB 버퍼 통째로</text>
+        </g>
+        <line x1="320" y1="135" x2="360" y2="135" stroke="#3fb950" stroke-width="2"/>
+        <g class="c-teal">
+          <rect x="360" y="110" width="100" height="50" rx="8" stroke-width="1"/>
+          <text class="th" x="410" y="132" text-anchor="middle">Tokenizer</text>
+          <text class="ts" x="410" y="148" text-anchor="middle">공백 분리</text>
+        </g>
+        <text class="ts" x="550" y="140" text-anchor="middle" fill="#3fb950">빠름 (버퍼 + 단순 분리)</text>
+      </svg>
+      <div class="diagram-label">Scanner는 정규식으로 파싱, BufferedReader는 버퍼 단위로 읽고 단순 분리</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>Scanner</th>
+            <th>BufferedReader + StringTokenizer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>속도</td>
+            <td>느림 (정규식 매번 호출)</td>
+            <td>빠름 (버퍼 + 단순 split)</td>
+          </tr>
+          <tr>
+            <td>타입 변환</td>
+            <td>nextInt() 자동 변환</td>
+            <td>Integer.parseInt() 수동</td>
+          </tr>
+          <tr>
+            <td>구분자</td>
+            <td>공백, 줄바꿈 자동</td>
+            <td>readLine() 후 직접 토큰화</td>
+          </tr>
+          <tr>
+            <td>예외 처리</td>
+            <td>없음</td>
+            <td>IOException 필수</td>
+          </tr>
+          <tr>
+            <td>코테 결론</td>
+            <td>소규모 입력만 OK</td>
+            <td>항상 이걸 쓰자</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== Section 2 ===== -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>BufferedReader + StringTokenizer 입력 패턴</h2>
+    </div>
+
+    <p class="prose">
+      BufferedReader는 <strong>한 줄씩 문자열로 읽고</strong>, StringTokenizer로 <strong>공백 기준 분리</strong>합니다.
+      이 두 개의 조합이 Java 코테 입력의 정석입니다.
+    </p>
+
+    <div class="sub-section">
+      <h3>패턴 1: 정수 한 개 읽기</h3>
+      <div class="code-label">Java</div>
+      <pre><code>BufferedReader br = <span class="kw">new</span> BufferedReader(<span class="kw">new</span> InputStreamReader(System.in));
+<span class="kw">int</span> n = Integer.<span class="fn">parseInt</span>(br.<span class="fn">readLine</span>().<span class="fn">trim</span>());</code></pre>
+    </div>
+
+    <div class="sub-section">
+      <h3>패턴 2: 한 줄에 여러 정수 (공백 구분)</h3>
+      <p class="prose">
+        입력: <code>5 3 7</code>
+      </p>
+      <div class="code-label">Java</div>
+      <pre><code>StringTokenizer st = <span class="kw">new</span> StringTokenizer(br.<span class="fn">readLine</span>());
+<span class="kw">int</span> a = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+<span class="kw">int</span> b = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+<span class="kw">int</span> c = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());</code></pre>
+    </div>
+
+    <div class="sub-section">
+      <h3>패턴 3: N줄에 걸친 2차원 배열 입력</h3>
+      <p class="prose">
+        입력 예시:<br>
+        <code>3 4</code> (N행 M열)<br>
+        <code>1 2 3 4</code><br>
+        <code>5 6 7 8</code><br>
+        <code>9 0 1 2</code>
+      </p>
+      <div class="code-label">Java</div>
+      <pre><code>StringTokenizer st = <span class="kw">new</span> StringTokenizer(br.<span class="fn">readLine</span>());
+<span class="kw">int</span> N = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+<span class="kw">int</span> M = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+<span class="kw">int</span>[][] grid = <span class="kw">new int</span>[N][M];
+
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; N; i++) {
+    st = <span class="kw">new</span> StringTokenizer(br.<span class="fn">readLine</span>());
+    <span class="kw">for</span> (<span class="kw">int</span> j = <span class="num">0</span>; j &lt; M; j++) {
+        grid[i][j] = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+    }
+}</code></pre>
+    </div>
+
+    <div class="sub-section">
+      <h3>패턴 4: 공백 없이 붙어있는 숫자</h3>
+      <p class="prose">
+        입력: <code>10110</code> (각 자리가 0 또는 1)
+      </p>
+      <div class="code-label">Java</div>
+      <pre><code>String line = br.<span class="fn">readLine</span>();
+<span class="kw">for</span> (<span class="kw">int</span> j = <span class="num">0</span>; j &lt; M; j++) {
+    grid[i][j] = line.<span class="fn">charAt</span>(j) - <span class="str">'0'</span>;  <span class="cm">// char → int 변환</span>
+}</code></pre>
+    </div>
+
+    <div class="callout green">
+      <strong>StringTokenizer vs split()</strong><br>
+      &bull; <code>split(" ")</code>은 내부적으로 정규식을 사용해서 상대적으로 느림<br>
+      &bull; StringTokenizer는 단순 문자열 분리라 <strong>약 2배 빠름</strong><br>
+      &bull; 코테에서는 항상 StringTokenizer 사용 권장
+    </div>
+
+    <div class="insight">
+      <div class="insight-icon">&#128161;</div>
+      <div class="insight-text">
+        <strong>자주 하는 실수</strong><br>
+        &bull; <strong>readLine().trim()</strong> — 끝에 공백/개행이 붙어 parseInt가 실패하는 경우 방지<br>
+        &bull; <strong>st를 매 줄마다 새로 생성</strong> — 한 번 만든 st를 다음 줄에 재활용하면 안 됨<br>
+        &bull; <strong>nextInt() 뒤에 nextLine()</strong> — Scanner에서 개행 문자가 남는 버그 (BufferedReader에선 발생 안 함)
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Section 3 ===== -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>StringBuilder 출력 — System.out.println의 함정</h2>
+    </div>
+
+    <p class="prose">
+      <strong>System.out.println()을 반복문 안에서 호출하면 매번 flush</strong>가 발생합니다.
+      출력이 수만 줄이면 이것만으로 시간 초과가 날 수 있습니다.
+    </p>
+
+    <div class="vs-box">
+      <div class="side bad">
+        <h4>느린 코드</h4>
+        <pre><code><span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">100000</span>; i++) {
+    System.out.<span class="fn">println</span>(arr[i]);
+}
+<span class="cm">// 10만 번 flush → 시간 초과</span></code></pre>
+      </div>
+      <div class="divider"><span>VS</span></div>
+      <div class="side good">
+        <h4>빠른 코드</h4>
+        <pre><code>StringBuilder sb = <span class="kw">new</span> StringBuilder();
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">100000</span>; i++) {
+    sb.<span class="fn">append</span>(arr[i]).<span class="fn">append</span>(<span class="str">'\n'</span>);
+}
+System.out.<span class="fn">print</span>(sb);
+<span class="cm">// 한 번만 flush → 통과</span></code></pre>
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <strong>성능 차이가 얼마나 되나?</strong><br>
+      10만 줄 출력 기준:<br>
+      &bull; <strong>println 반복</strong>: ~800ms<br>
+      &bull; <strong>StringBuilder + 한 번 출력</strong>: ~50ms<br>
+      &rarr; <strong>약 16배 차이</strong>
+    </div>
+
+    <div class="sub-section">
+      <h3>StringBuilder 핵심 메서드</h3>
+      <div class="code-label">Java</div>
+      <pre><code>StringBuilder sb = <span class="kw">new</span> StringBuilder();
+
+sb.<span class="fn">append</span>(<span class="str">"hello"</span>);       <span class="cm">// 문자열 추가</span>
+sb.<span class="fn">append</span>(<span class="num">42</span>);             <span class="cm">// 정수도 바로 추가 가능</span>
+sb.<span class="fn">append</span>(<span class="str">'\n'</span>);           <span class="cm">// 줄바꿈</span>
+sb.<span class="fn">append</span>(a).<span class="fn">append</span>(<span class="str">' '</span>).<span class="fn">append</span>(b);  <span class="cm">// 체이닝</span>
+
+System.out.<span class="fn">print</span>(sb);     <span class="cm">// 마지막에 한 번만 출력</span></code></pre>
+    </div>
+
+    <div class="sub-section">
+      <h3>BufferedWriter로 출력하기 (대안)</h3>
+      <div class="code-label">Java</div>
+      <pre><code>BufferedWriter bw = <span class="kw">new</span> BufferedWriter(<span class="kw">new</span> OutputStreamWriter(System.out));
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; N; i++) {
+    bw.<span class="fn">write</span>(arr[i] + <span class="str">"\n"</span>);
+}
+bw.<span class="fn">flush</span>();  <span class="cm">// 반드시 flush 호출!</span>
+bw.<span class="fn">close</span>();</code></pre>
+    </div>
+
+    <div class="insight">
+      <div class="insight-icon">&#128161;</div>
+      <div class="insight-text">
+        <strong>StringBuilder vs BufferedWriter</strong><br>
+        &bull; <strong>StringBuilder</strong>: 간단하고 직관적, 대부분의 코테에서 충분<br>
+        &bull; <strong>BufferedWriter</strong>: 출력이 극단적으로 많을 때 (메모리에 다 담기 부담스러울 때)<br>
+        &bull; 실전에서는 <strong>StringBuilder가 정석</strong> — 코드가 짧고 실수가 적음
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Section 4 ===== -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>int → long 오버플로우 감각</h2>
+    </div>
+
+    <p class="prose">
+      Java의 <strong>int는 약 21억</strong>(2,147,483,647)까지만 저장됩니다.
+      코딩 테스트에서 <strong>곱셈, 누적 합, 큰 수 연산</strong>이 나오면 반드시 long을 의심해야 합니다.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>자료형</th>
+            <th>범위</th>
+            <th>대략적인 크기</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>int (32비트)</td>
+            <td>-2,147,483,648 ~ 2,147,483,647</td>
+            <td>약 &plusmn;21억</td>
+          </tr>
+          <tr>
+            <td>long (64비트)</td>
+            <td>-9.2 &times; 10<sup>18</sup> ~ 9.2 &times; 10<sup>18</sup></td>
+            <td>약 &plusmn;922경</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout red">
+      <strong>오버플로우가 터지면 어떻게 되나?</strong><br>
+      Java에서 int 오버플로우는 <strong>에러 없이 조용히 음수로 뒤집어집니다.</strong><br>
+      <code>2,147,483,647 + 1 = -2,147,483,648</code><br>
+      틀린 답이 나오는데 원인을 못 찾아 시간을 날리는 최악의 패턴입니다.
+    </div>
+
+    <div class="sub-section">
+      <h3>위험 신호 체크리스트</h3>
+      <div class="code-label">이 조건이 보이면 long을 써라</div>
+      <pre><code><span class="cm">// 1. N이 10만 이상이고 값이 10만 이상인 배열의 합</span>
+<span class="cm">//    100,000 × 100,000 = 10,000,000,000 → int 범위 초과!</span>
+
+<span class="cm">// 2. 두 int의 곱셈</span>
+<span class="cm">//    50,000 × 50,000 = 2,500,000,000 → int 범위 초과!</span>
+
+<span class="cm">// 3. 누적 합 (prefix sum)</span>
+<span class="cm">//    원소가 최대 10^6이고 N이 10^5이면</span>
+<span class="cm">//    합계 최대 = 10^11 → long 필수</span>
+
+<span class="cm">// 4. 팩토리얼, 조합, 큰 수 모듈러 연산</span>
+<span class="cm">//    중간 계산에서 long 범위도 넘을 수 있음</span></code></pre>
+    </div>
+
+    <div class="sub-section">
+      <h3>흔한 실수와 수정</h3>
+    </div>
+
+    <div class="vs-box">
+      <div class="side bad">
+        <h4>버그 코드</h4>
+        <pre><code><span class="kw">int</span> a = <span class="num">100000</span>;
+<span class="kw">int</span> b = <span class="num">100000</span>;
+<span class="kw">int</span> result = a * b;
+<span class="cm">// result = 1,410,065,408</span>
+<span class="cm">// (오버플로우! 정답은 10^10)</span></code></pre>
+      </div>
+      <div class="divider"><span>VS</span></div>
+      <div class="side good">
+        <h4>올바른 코드</h4>
+        <pre><code><span class="kw">int</span> a = <span class="num">100000</span>;
+<span class="kw">int</span> b = <span class="num">100000</span>;
+<span class="kw">long</span> result = (<span class="kw">long</span>) a * b;
+<span class="cm">// result = 10,000,000,000</span>
+<span class="cm">// 캐스팅은 곱셈 전에!</span></code></pre>
+      </div>
+    </div>
+
+    <div class="callout purple">
+      <strong>캐스팅 위치가 중요하다!</strong><br>
+      <code><span style="color:#f78166">long result = a * b;</span></code> &rarr; int끼리 먼저 곱해서 오버플로우 발생 후 long에 대입 (이미 늦음)<br>
+      <code><span style="color:#3fb950">long result = (long) a * b;</span></code> &rarr; a를 먼저 long으로 변환 후 곱셈 (안전)
+    </div>
+
+    <div class="sub-section">
+      <h3>빠른 판단 공식</h3>
+      <div class="code-label">문제에서 이 계산을 해보자</div>
+      <pre><code><span class="cm">// 최대 입력값으로 계산했을 때:</span>
+
+<span class="cm">// ① 합계: N × max_value</span>
+<span class="cm">//   → 21억(2 × 10^9) 넘으면 long</span>
+
+<span class="cm">// ② 곱: max_value × max_value</span>
+<span class="cm">//   → 46,340 × 46,340 = 2,147,395,600 (int 거의 한계)</span>
+<span class="cm">//   → 46,341부터는 int 오버플로우</span>
+
+<span class="cm">// ③ "결과를 1,000,000,007로 나눈 나머지를 출력"</span>
+<span class="cm">//   → 이 문구가 보이면 중간 곱셈에서 long 필수</span>
+
+<span class="cm">// 요약: N > 5만 이거나 값 > 5만이면 습관적으로 long</span></code></pre>
+    </div>
+
+    <div class="insight">
+      <div class="insight-icon">&#128161;</div>
+      <div class="insight-text">
+        <strong>실전 습관</strong><br>
+        &bull; 문제를 읽자마자 <strong>N과 값의 범위를 확인</strong>하고 int/long 결정<br>
+        &bull; 확신이 없으면 <strong>그냥 long</strong>을 써라 — 메모리 차이는 무시할 수준<br>
+        &bull; 배열 인덱스는 int로 충분 (배열 크기가 21억을 넘을 일은 없음)
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Section 5 ===== -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>실전 풀 템플릿</h2>
+    </div>
+
+    <p class="prose">
+      아래 템플릿을 복사해서 시작하면 <strong>입출력 세팅에 시간을 낭비하지 않습니다.</strong>
+      코테 시작 전에 이 구조를 손에 익혀두세요.
+    </p>
+
+    <div class="code-label">Java — 코딩 테스트 스타터 템플릿</div>
+    <pre><code><span class="kw">import</span> java.io.*;
+<span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="type">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) <span class="kw">throws</span> IOException {
+        BufferedReader br = <span class="kw">new</span> BufferedReader(<span class="kw">new</span> InputStreamReader(System.in));
+        StringBuilder sb = <span class="kw">new</span> StringBuilder();
+
+        <span class="cm">// ── 입력 ──</span>
+        <span class="kw">int</span> N = Integer.<span class="fn">parseInt</span>(br.<span class="fn">readLine</span>().<span class="fn">trim</span>());
+
+        StringTokenizer st = <span class="kw">new</span> StringTokenizer(br.<span class="fn">readLine</span>());
+        <span class="kw">int</span>[] arr = <span class="kw">new int</span>[N];
+        <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; N; i++) {
+            arr[i] = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+        }
+
+        <span class="cm">// ── 풀이 ──</span>
+        <span class="kw">long</span> answer = <span class="fn">solve</span>(N, arr);
+
+        <span class="cm">// ── 출력 ──</span>
+        sb.<span class="fn">append</span>(answer).<span class="fn">append</span>(<span class="str">'\n'</span>);
+        System.out.<span class="fn">print</span>(sb);
+    }
+
+    <span class="kw">static long</span> <span class="fn">solve</span>(<span class="kw">int</span> N, <span class="kw">int</span>[] arr) {
+        <span class="cm">// 여기에 풀이 작성</span>
+        <span class="kw">return</span> <span class="num">0</span>;
+    }
+}</code></pre>
+
+    <div class="callout green">
+      <strong>템플릿 사용 요령</strong><br>
+      &bull; <strong>import는 java.io.*, java.util.* 두 줄이면 충분</strong><br>
+      &bull; <strong>throws IOException</strong> — try-catch 대신 main에 선언 (코드가 짧아짐)<br>
+      &bull; <strong>풀이 로직은 별도 메서드</strong>로 분리하면 디버깅이 쉬움<br>
+      &bull; <strong>trim()</strong> — 백준 등에서 입력 끝에 공백이 붙는 경우 방지
+    </div>
+
+    <div class="sub-section">
+      <h3>2차원 배열 + 다중 출력 템플릿</h3>
+      <div class="code-label">Java — 확장 템플릿</div>
+      <pre><code><span class="kw">public static void</span> <span class="fn">main</span>(String[] args) <span class="kw">throws</span> IOException {
+    BufferedReader br = <span class="kw">new</span> BufferedReader(<span class="kw">new</span> InputStreamReader(System.in));
+    StringBuilder sb = <span class="kw">new</span> StringBuilder();
+
+    <span class="kw">int</span> T = Integer.<span class="fn">parseInt</span>(br.<span class="fn">readLine</span>().<span class="fn">trim</span>());  <span class="cm">// 테스트 케이스 수</span>
+
+    <span class="kw">while</span> (T-- &gt; <span class="num">0</span>) {
+        StringTokenizer st = <span class="kw">new</span> StringTokenizer(br.<span class="fn">readLine</span>());
+        <span class="kw">int</span> N = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+        <span class="kw">int</span> M = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+
+        <span class="kw">int</span>[][] grid = <span class="kw">new int</span>[N][M];
+        <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; N; i++) {
+            st = <span class="kw">new</span> StringTokenizer(br.<span class="fn">readLine</span>());
+            <span class="kw">for</span> (<span class="kw">int</span> j = <span class="num">0</span>; j &lt; M; j++) {
+                grid[i][j] = Integer.<span class="fn">parseInt</span>(st.<span class="fn">nextToken</span>());
+            }
+        }
+
+        sb.<span class="fn">append</span>(<span class="fn">solve</span>(N, M, grid)).<span class="fn">append</span>(<span class="str">'\n'</span>);
+    }
+    System.out.<span class="fn">print</span>(sb);  <span class="cm">// 모든 케이스 한 번에 출력</span>
+}</code></pre>
+    </div>
+
+    <div class="insight">
+      <div class="insight-icon">&#128161;</div>
+      <div class="insight-text">
+        <strong>3줄 요약</strong><br>
+        &bull; <strong>입력</strong>: BufferedReader + StringTokenizer (Scanner 금지)<br>
+        &bull; <strong>출력</strong>: StringBuilder에 모아서 한 번에 print<br>
+        &bull; <strong>자료형</strong>: N &times; value가 21억 넘을 것 같으면 long
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    개인 학습 기록 &middot; 2026
+  </div>
+</footer>
+
+</body>
+</html>
